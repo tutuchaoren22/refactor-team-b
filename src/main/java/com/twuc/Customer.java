@@ -33,8 +33,15 @@ class Customer {
     }
 
     String htmlStatement() {
-        //todo
-        return null;
+        StringBuilder result = new StringBuilder("<h1>"+format(HEADER_LINE, name).trim()+"</h1>\n");
+        result.append("<p>");
+        for (Rental rental : rentals) {
+            result.append(rental.getMovie().getTitle()+": "+rental.getCharge()+("<br>"));
+        }
+        result.append("</p>");
+        result.append("<p>"+format(TOTAL_CHARGE_LINE, getTotalCharge()).trim()+"</p>\n");
+        result.append("<p>"+format(TOTAL_POINTS_LINE, getTotalFrequentRenterPoints())+"</p>");
+        return result.toString();
     }
 
     private double getTotalCharge() {
